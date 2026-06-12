@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administração - Residencial Jaborandi</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="wrapper">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-container">
+                    <i class="fa-solid fa-building-shield logo-icon"></i>
+                </div>
+                <h3>Residencial Jaborandi</h3>
+                <span class="sub-logo">Jangurussu</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fa-solid fa-chart-pie"></i> <span>Dashboard</span></a></li>
+                <li><a href="moradores.html"><i class="fa-solid fa-users"></i> <span>Moradores</span></a></li>
+                <li><a href="visitantes.html"><i class="fa-solid fa-id-card"></i> <span>Visitantes</span></a></li>
+                <li><a href="encomendas.html"><i class="fa-solid fa-box"></i> <span>Encomendas</span></a></li>
+                <li><a href="avisos.html"><i class="fa-solid fa-bullhorn"></i> <span>Avisos</span></a></li>
+                <li class="active"><a href="admin.html"><i class="fa-solid fa-lock"></i> <span>Admin</span></a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <button id="theme-toggle" class="btn-theme"><i class="fa-solid fa-moon"></i> <span>Alternar Tema</span></button>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <header class="top-header">
+                <button id="mobile-toggle" class="mobile-toggle"><i class="fa-solid fa-bars"></i></button>
+                <h2>Painel Administrativo Geral</h2>
+            </header>
+
+            <div class="content-body">
+                <div id="login-block" class="card login-card">
+                    <h3><i class="fa-solid fa-shield-halved"></i> Login Administrativo</h3>
+                    <form id="form-login">
+                        <div class="form-group">
+                            <label for="adm-user">Usuário</label>
+                            <input type="text" id="adm-user" required placeholder="Nome de usuário">
+                        </div>
+                        <div class="form-group">
+                            <label for="adm-pass">Senha</label>
+                            <input type="password" id="adm-pass" required placeholder="Senha secreta">
+                        </div>
+                        <div id="login-error" class="error-msg hidden">Credenciais incorretas. Tente novamente.</div>
+                        <button type="submit" class="btn-submit"><i class="fa-solid fa-right-to-bracket"></i> Autenticar</button>
+                    </form>
+                </div>
+
+                <div id="admin-workspace" class="hidden">
+                    <div class="admin-header-actions">
+                        <h3><i class="fa-solid fa-users-gear"></i> Base Central de Unidades e Moradores</h3>
+                        <button id="btn-logout" class="btn-cancel"><i class="fa-solid fa-power-off"></i> Sair do Painel</button>
+                    </div>
+
+                    <div class="dashboard-flex-row">
+                        <section class="card standard-form-card">
+                            <h3 id="form-morador-title"><i class="fa-solid fa-user-plus"></i> Inserir / Editar Unidade</h3>
+                            <form id="form-manage-morador">
+                                <input type="hidden" id="morador-index">
+                                <div class="form-row">
+                                    <div class="form-group col-6">
+                                        <label for="m-bloco">Bloco</label>
+                                        <select id="m-bloco" required></select>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="m-apto">Apartamento</label>
+                                        <input type="text" id="m-apto" required placeholder="Ex: 101">
+                                    </div>
+                                </div>
+                                <hr>
+                                <h4>Contatos de Moradores (Até 3)</h4>
+                                <div id="contatos-inputs-container">
+                                    </div>
+                                <div class="btn-group-row">
+                                    <button type="submit" class="btn-submit"><i class="fa-solid fa-floppy-disk"></i> Gravar Alterações</button>
+                                    <button type="button" id="btn-cancel-m-edit" class="btn-cancel hidden">Cancelar Edição</button>
+                                </div>
+                            </form>
+                        </section>
+
+                        <section class="card standard-list-card">
+                            <h3><i class="fa-solid fa-address-book"></i> Lista Completa de Registros</h3>
+                            <div class="table-container row-limited">
+                                <table class="table-styled">
+                                    <thead>
+                                        <tr>
+                                            <th>Localização</th>
+                                            <th>Morador Principal</th>
+                                            <th>Contatos Cadastrados</th>
+                                            <th>Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="lista-admin-moradores">
+                                        </tbody>
+                                </table>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/admin.js"></script>
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            const isDark = document.body.classList.contains('dark-theme');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            themeToggle.innerHTML = isDark ? '<i class="fa-solid fa-sun"></i> <span>Tema Claro</span>' : '<i class="fa-solid fa-moon"></i> <span>Tema Escuro</span>';
+        });
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-theme');
+            themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i> <span>Tema Claro</span>';
+        }
+        document.getElementById('mobile-toggle').addEventListener('click', () => {
+            document.querySelector('.sidebar').classList.toggle('open');
+        });
+    </script>
+</body>
+</html>

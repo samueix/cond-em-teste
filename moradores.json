@@ -1,0 +1,18 @@
+{
+  "moradores": [
+    {
+      "id": 1,
+      "nome": "Morador de Exemplo 1",
+      "bloco": "A",
+      "apartamento": "101",
+      "contato": "(11) 99999-9999"
+    },
+    {
+      "id": 2,
+      "nome": "Morador de Exemplo 2",
+      "bloco": "B",
+      "apartamento": "202",
+      "contato": "(11) 88888-8888"
+    }
+  ]
+}

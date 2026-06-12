@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encomendas - Residencial Jaborandi</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="wrapper">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-container">
+                    <i class="fa-solid fa-building-shield logo-icon"></i>
+                </div>
+                <h3>Residencial Jaborandi</h3>
+                <span class="sub-logo">Jangurussu</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fa-solid fa-chart-pie"></i> <span>Dashboard</span></a></li>
+                <li><a href="moradores.html"><i class="fa-solid fa-users"></i> <span>Moradores</span></a></li>
+                <li><a href="visitantes.html"><i class="fa-solid fa-id-card"></i> <span>Visitantes</span></a></li>
+                <li class="active"><a href="encomendas.html"><i class="fa-solid fa-box"></i> <span>Encomendas</span></a></li>
+                <li><a href="avisos.html"><i class="fa-solid fa-bullhorn"></i> <span>Avisos</span></a></li>
+                <li><a href="admin.html"><i class="fa-solid fa-lock"></i> <span>Admin</span></a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <button id="theme-toggle" class="btn-theme"><i class="fa-solid fa-moon"></i> <span>Alternar Tema</span></button>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <header class="top-header">
+                <button id="mobile-toggle" class="mobile-toggle"><i class="fa-solid fa-bars"></i></button>
+                <h2>Gerenciamento de Encomendas</h2>
+            </header>
+
+            <div class="content-body">
+                <div class="dashboard-flex-row">
+                    <section class="card standard-form-card">
+                        <h3 id="form-enc-title"><i class="fa-solid fa-box-archive"></i> Receber Nova Encomenda</h3>
+                        <form id="form-encomenda">
+                            <input type="hidden" id="enc-id">
+                            <div class="form-row">
+                                <div class="form-group col-6">
+                                    <label for="enc-bloco">Bloco</label>
+                                    <select id="enc-bloco" required></select>
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="enc-apto">Apartamento</label>
+                                    <input type="text" id="enc-apto" required placeholder="Ex: 104">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="enc-destinatario">Nome do Destinatário</label>
+                                <input type="text" id="enc-destinatario" required placeholder="Ex: Samuel">
+                            </div>
+                            <div class="form-group">
+                                <label for="enc-transportadora">Empresa Logística / Transportadora</label>
+                                <input type="text" id="enc-transportadora" required placeholder="Ex: Correios, Loggi, Mercado Livre">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-6">
+                                    <label for="enc-data">Data de Entrada</label>
+                                    <input type="date" id="enc-data" required>
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="enc-status">Status Operacional</label>
+                                    <select id="enc-status" required>
+                                        <option value="Aguardando retirada">Aguardando retirada</option>
+                                        <option value="Entregue">Entregue</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="btn-group-row">
+                                <button type="submit" class="btn-submit"><i class="fa-solid fa-square-check"></i> Salvar Registro</button>
+                                <button type="button" id="btn-cancel-edit" class="btn-cancel hidden">Cancelar Edição</button>
+                            </div>
+                        </form>
+                    </section>
+
+                    <section class="card standard-list-card">
+                        <h3><i class="fa-solid fa-boxes-packing"></i> Inventário de Pacotes na Portaria</h3>
+                        <div class="table-container">
+                            <table class="table-styled">
+                                <thead>
+                                    <tr>
+                                        <th>Destino / Destinatário</th>
+                                        <th>Origem</th>
+                                        <th>Status</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="lista-encomendas">
+                                    </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/encomendas.js"></script>
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            const isDark = document.body.classList.contains('dark-theme');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            themeToggle.innerHTML = isDark ? '<i class="fa-solid fa-sun"></i> <span>Tema Claro</span>' : '<i class="fa-solid fa-moon"></i> <span>Tema Escuro</span>';
+        });
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-theme');
+            themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i> <span>Tema Claro</span>';
+        }
+        document.getElementById('mobile-toggle').addEventListener('click', () => {
+            document.querySelector('.sidebar').classList.toggle('open');
+        });
+    </script>
+</body>
+</html>

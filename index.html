@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Residencial Jaborandi - Portaria</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="wrapper">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-container">
+                    <i class="fa-solid fa-building-shield logo-icon"></i>
+                </div>
+                <h3>Residencial Jaborandi</h3>
+                <span class="sub-logo">Jangurussu</span>
+            </div>
+            <ul class="nav-links">
+                <li class="active"><a href="index.html"><i class="fa-solid fa-chart-pie"></i> <span>Dashboard</span></a></li>
+                <li><a href="moradores.html"><i class="fa-solid fa-users"></i> <span>Moradores</span></a></li>
+                <li><a href="visitantes.html"><i class="fa-solid fa-id-card"></i> <span>Visitantes</span></a></li>
+                <li><a href="encomendas.html"><i class="fa-solid fa-box"></i> <span>Encomendas</span></a></li>
+                <li><a href="avisos.html"><i class="fa-solid fa-bullhorn"></i> <span>Avisos</span></a></li>
+                <li><a href="admin.html"><i class="fa-solid fa-lock"></i> <span>Admin</span></a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <button id="theme-toggle" class="btn-theme"><i class="fa-solid fa-moon"></i> <span>Alternar Tema</span></button>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <header class="top-header">
+                <button id="mobile-toggle" class="mobile-toggle"><i class="fa-solid fa-bars"></i></button>
+                <h2>Dashboard de Controle</h2>
+                <div class="header-right">
+                    <span id="current-time">00:00:00</span>
+                </div>
+            </header>
+
+            <div class="content-body">
+                <section class="search-section card">
+                    <h3><i class="fa-solid fa-magnifying-glass"></i> Pesquisa Rápida Geral</h3>
+                    <div class="search-box">
+                        <input type="text" id="global-search" placeholder="Busque por nome, telefone, bloco ou apartamento...">
+                    </div>
+                    <div id="search-results" class="search-results hidden"></div>
+                </section>
+
+                <section class="dashboard-grid">
+                    <a href="visitantes.html" class="dash-card">
+                        <div class="card-icon blue"><i class="fa-solid fa-user-check"></i></div>
+                        <div class="card-info">
+                            <span id="count-visitantes" class="card-number">0</span>
+                            <span class="card-label">Visitantes Hoje</span>
+                        </div>
+                    </a>
+                    <a href="encomendas.html" class="dash-card">
+                        <div class="card-icon orange"><i class="fa-solid fa-boxes-stacked"></i></div>
+                        <div class="card-info">
+                            <span id="count-encomendas" class="card-number">0</span>
+                            <span class="card-label">Encomendas Pendentes</span>
+                        </div>
+                    </a>
+                    <a href="avisos.html" class="dash-card">
+                        <div class="card-icon red"><i class="fa-solid fa-circle-exclamation"></i></div>
+                        <div class="card-info">
+                            <span id="count-avisos" class="card-number">0</span>
+                            <span class="card-label">Avisos no Mural</span>
+                        </div>
+                    </a>
+                </section>
+
+                <div class="dashboard-flex-row">
+                    <section class="phones-section card">
+                        <h3><i class="fa-solid fa-phone-flip"></i> Telefones Úteis</h3>
+                        <div class="phones-grid">
+                            <div class="phone-item">
+                                <span class="phone-name">Portaria</span>
+                                <a href="tel:+558530000001" class="btn-phone"><i class="fa-solid fa-phone"></i> Ramal 9000</a>
+                            </div>
+                            <div class="phone-item">
+                                <span class="phone-name">Síndico</span>
+                                <a href="tel:+5585999999999" class="btn-phone"><i class="fa-solid fa-phone"></i> (85) 99999-9999</a>
+                            </div>
+                            <div class="phone-item urgent">
+                                <span class="phone-name">SAMU</span>
+                                <a href="tel:192" class="btn-phone"><i class="fa-solid fa-truck-medical"></i> 192</a>
+                            </div>
+                            <div class="phone-item urgent">
+                                <span class="phone-name">Polícia</span>
+                                <a href="tel:190" class="btn-phone"><i class="fa-solid fa-shield-halved"></i> 190</a>
+                            </div>
+                            <div class="phone-item urgent">
+                                <span class="phone-name">Bombeiros</span>
+                                <a href="tel:193" class="btn-phone"><i class="fa-solid fa-fire-extinguisher"></i> 193</a>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="info-section card">
+                        <h3><i class="fa-solid fa-circle-info"></i> Informações do Sistema</h3>
+                        <p>Bem-vindo ao painel operacional do <strong>Residencial Jaborandi</strong>.</p>
+                        <p>Utilize as abas laterais para realizar registros, checar dados de moradores e gerenciar acessos de forma rápida e segura.</p>
+                        <div class="location-badge">
+                            <i class="fa-solid fa-location-dot"></i> Jangurussu, Fortaleza - CE
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Relógio do Cabeçalho
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('pt-BR');
+            const element = document.getElementById('current-time');
+            if (element) element.textContent = timeString;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Alternador de Tema Operacional
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            const isDark = document.body.classList.contains('dark-theme');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            themeToggle.innerHTML = isDark ? '<i class="fa-solid fa-sun"></i> <span>Tema Claro</span>' : '<i class="fa-solid fa-moon"></i> <span>Tema Escuro</span>';
+        });
+
+        // Carregar Tema Padrão
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-theme');
+            themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i> <span>Tema Claro</span>';
+        }
+
+        // Toggle do Menu Mobile
+        document.getElementById('mobile-toggle').addEventListener('click', () => {
+            document.querySelector('.sidebar').classList.toggle('open');
+        });
+
+        // Forçar carga inicial de moradores fictícios caso LocalStorage esteja vazio
+        document.addEventListener("DOMContentLoaded", () => {
+            if (!localStorage.getItem('moradores')) {
+                fetch('data/moradores.json')
+                    .then(response => response.json())
+                    .then(data => {
+                        localStorage.setItem('moradores', JSON.stringify(data));
+                        window.location.reload();
+                    })
+                    .catch(err => {
+                        // Fallback dinâmico caso haja barreira de CORS local sem servidor rodando
+                        const fallbackData = [];
+                        const blocos = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+                        blocos.forEach(b => {
+                            [101, 102, 103, 104].forEach(a => {
+                                if(b === 'B' && a === 102) {
+                                    fallbackData.push({
+                                        id: "B-102", bloco: "B", apartamento: "102",
+                                        contatos: [
+                                            { nome: "Samuel", telefone: "85985110225" },
+                                            { nome: "Contato 2",  telefone: "85998888888" },
+                                            { nome: "Contato 3", telefone: "85997777777" }
+                                        ]
+                                    });
+                                } else {
+                                    fallbackData.push({
+                                        id: `${b}-${a}`, bloco: b, apartamento: a.toString(),
+                                        contatos: [
+                                            { nome: `Morador ${b} ${a}`, telefone: `8590000${b.charCodeAt(0)}${a}` }
+                                        ]
+                                    });
+                                }
+                            });
+                        });
+                        localStorage.setItem('moradores', JSON.stringify(fallbackData));
+                    });
+            }
+
+            // Atualização de contadores da Dashboard
+            const vits = JSON.parse(localStorage.getItem('visitantes') || '[]');
+            const encs = JSON.parse(localStorage.getItem('encomendas') || '[]');
+            const avis = JSON.parse(localStorage.getItem('avisos') || '[]');
+            
+            if(document.getElementById('count-visitantes')) {
+                document.getElementById('count-visitantes').textContent = vits.length;
+            }
+            if(document.getElementById('count-encomendas')) {
+                document.getElementById('count-encomendas').textContent = encs.filter(e => e.status === 'Aguardando retirada').length;
+            }
+            if(document.getElementById('count-avisos')) {
+                document.getElementById('count-avisos').textContent = avis.length;
+            }
+        });
+
+        // Mecanismo de Pesquisa Rápida Global
+        const searchInput = document.getElementById('global-search');
+        const resultsDiv = document.getElementById('search-results');
+
+        if(searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase().trim();
+                if (query.length < 2) {
+                    resultsDiv.classList.add('hidden');
+                    resultsDiv.innerHTML = '';
+                    return;
+                }
+
+                const moradores = JSON.parse(localStorage.getItem('moradores') || '[]');
+                const resultados = [];
+
+                moradores.forEach(m => {
+                    let match = false;
+                    if(m.bloco.toLowerCase() === query || m.apartamento.includes(query)) match = true;
+                    m.contatos.forEach(c => {
+                        if(c.nome.toLowerCase().includes(query) || c.telefone.includes(query)) match = true;
+                    });
+
+                    if(match) resultados.push(m);
+                });
+
+                if(resultados.length > 0) {
+                    resultsDiv.classList.remove('hidden');
+                    resultsDiv.innerHTML = resultados.map(m => `
+                        <div class="search-item">
+                            <div>
+                                <strong>Bloco ${m.bloco} - Apto ${m.apartamento}</strong><br>
+                                <small>${m.contatos.map(c => `${c.nome} (${c.telefone})`).join(' | ')}</small>
+                            </div>
+                            <a href="moradores.html?bloco=${m.bloco}&apto=${m.apartamento}" class="btn-action-view"><i class="fa-solid fa-eye"></i> Ver</a>
+                        </div>
+                    `).join('');
+                } else {
+                    resultsDiv.classList.remove('hidden');
+                    resultsDiv.innerHTML = '<div class="search-item text-center">Nenhum registro correspondente encontrado.</div>';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
